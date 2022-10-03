@@ -1,0 +1,213 @@
+openapi: 3.0.0
+
+info:
+  title: STACK_OVERFLOW
+
+  contact: {}
+
+  version: "1.0"
+
+servers:
+  - url: https://my-job-test-stackoverflow.herokuapp.com/api/v1
+
+    variables: {}
+
+paths:
+  /question:
+    get:
+      tags:
+        - Questions
+
+      summary: Get all Questions
+
+      operationId: GetallQuestions
+
+      parameters: []
+
+      responses:
+        "200":
+          description: ""
+
+          headers: {}
+
+      deprecated: false
+
+      security: []
+
+    post:
+      tags:
+        - Questions
+
+      summary: Create question
+
+      operationId: Createquestion
+
+      parameters: []
+
+      requestBody:
+        description: ""
+
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/CreatequestionRequest"
+
+                - example:
+                    title: my fifth question
+
+                    body: This is my fifth test body
+
+                    tags: react, html
+
+            example:
+              title: my fifth question
+
+              body: This is my fifth test body
+
+              tags: react, html
+
+        required: true
+
+      responses:
+        "200":
+          description: ""
+
+          headers: {}
+
+      deprecated: false
+
+      security: []
+
+  /question/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The question ID
+
+    get:
+      tags:
+        - Questions
+
+      summary: Get single question
+
+      operationId: Getsinglequestion
+
+      parameters: []
+
+      responses:
+        "200":
+          description: ""
+
+          headers: {}
+
+      deprecated: false
+
+      security: []
+
+  /answer:
+    post:
+      tags:
+        - Answers
+
+      summary: Answer questions
+
+      operationId: Answerquestions
+
+      parameters: []
+
+      requestBody:
+        description: ""
+
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/AnswerquestionsRequest"
+
+                - example:
+                    body: This is the fourth answer to this question
+
+                    questionId: 633afdca5bc443bdeef8f80c
+
+            example:
+              body: This is the fourth answer to this question
+
+              questionId: 633afdca5bc443bdeef8f80c
+
+        required: true
+
+      responses:
+        "200":
+          description: ""
+
+          headers: {}
+
+      deprecated: false
+
+      security: []
+
+components:
+  schemas:
+    CreatequestionRequest:
+      title: CreatequestionRequest
+
+      required:
+        - title
+
+        - body
+
+        - tags
+
+      type: object
+
+      properties:
+        title:
+          type: string
+
+        body:
+          type: string
+
+        tags:
+          type: string
+
+      example:
+        title: my fifth question
+
+        body: This is my fifth test body
+
+        tags: react, html
+
+    AnswerquestionsRequest:
+      title: AnswerquestionsRequest
+
+      required:
+        - body
+
+        - questionId
+
+      type: object
+
+      properties:
+        body:
+          type: string
+
+        questionId:
+          type: string
+
+      example:
+        body: This is the fourth answer to this question
+
+        questionId: 633afdca5bc443bdeef8f80c
+
+tags:
+  - name: Questions
+
+    description: ""
+
+  - name: Answers
+
+    description: ""
